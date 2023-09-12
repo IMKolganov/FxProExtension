@@ -10,17 +10,15 @@ namespace FxPro
         {
             StringBuilder str = new StringBuilder();
 
-
-
             int howMuch = -1;
-            bool needSceep = false;
+            bool skip = false;
             foreach (char simbol in current)
             {
                 foreach (char findSimbol in oldValue)
                 {
-                    if (needSceep)
+                    if (skip)
                     {
-                        needSceep = false;
+                        skip = false;
                         continue;
                     }
 
@@ -28,13 +26,13 @@ namespace FxPro
                     {
                         if (howMuch == -1)
                         {
-                            needSceep = oldValue.Length > 1;
+                            skip = oldValue.Length > 1;
                             howMuch = 1;
                             break;
                         }
                         else
                         {
-                            needSceep = true;
+                            skip = true;
                             howMuch++;
                         }
 
@@ -43,14 +41,14 @@ namespace FxPro
                         {
                             str.Append(newValue);
                             howMuch = -1;
-                            needSceep = false;
+                            skip = false;
                             break;
                         }
 
                     }
                     else
                     {
-                        needSceep = false;
+                        skip = false;
                         howMuch = -1;
                         str.Append(simbol);
                         break;
