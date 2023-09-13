@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -9,50 +10,30 @@ namespace FxPro
         public static string Replace2(this string current, string oldValue, string newValue)
         {
             StringBuilder str = new StringBuilder();
+            int i = 0;
 
-            int howMuch = -1;
-            bool skip = false;
-            foreach (char simbol in current)
+            while (i < current.Length)
             {
-                foreach (char findSimbol in oldValue)
+                bool mutch = true;
+
+                for (int j = 0; j < oldValue.Length; j++)
                 {
-                    if (skip)
+                    if (i + j >= current.Length || current[i + j] != oldValue[j])
                     {
-                        skip = false;
-                        continue;
-                    }
-
-                    if (simbol == findSimbol)
-                    {
-                        if (howMuch == -1)
-                        {
-                            skip = oldValue.Length > 1;
-                            howMuch = 1;
-                            break;
-                        }
-                        else
-                        {
-                            skip = true;
-                            howMuch++;
-                        }
-
-
-                        if (howMuch == oldValue.Length)
-                        {
-                            str.Append(newValue);
-                            howMuch = -1;
-                            skip = false;
-                            break;
-                        }
-
-                    }
-                    else
-                    {
-                        skip = false;
-                        howMuch = -1;
-                        str.Append(simbol);
+                        mutch = false;
                         break;
                     }
+                }
+
+                if (mutch)
+                {
+                    str.Append(newValue);
+                    i += oldValue.Length;
+                }
+                else
+                {
+                    str.Append(current[i]);
+                    i++;
                 }
             }
             return str.ToString();

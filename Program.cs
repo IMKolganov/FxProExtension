@@ -3,23 +3,27 @@ using FxPro;
 
 Console.WriteLine("Hello, World!");
 
-var s = "abcde";
-
-
-//abcde
-var result = s.Replace2("bc", "y");
+var input = "abcde";
+var result = input.Replace2("bc", "y");
 
 Console.WriteLine(result);
 
 
-//string input = "aabb";
-//string oldVal = "aab";
-//string newVal = "xyz";
-//res = input.Replace2(oldVal, newVal);
 
-
+input = "aabb";
+result = input.Replace2("aab", "xyz");
 Console.WriteLine(result);
+
+input = "aaaa";
+result = input.Replace2("aa", "b");
+Console.WriteLine(result);
+
+
+
+input = "ababa";
+result = input.Replace2("aba", "c");
+Console.WriteLine(result);
+
 
 Console.WriteLine("FxPro is done!!!");
-
 Console.ReadLine();
